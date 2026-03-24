@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice Management System</title>
+
+<style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin: 20px;
+    }
+
+    table {
+        margin: auto;
+        width: 80%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    th {
+        background: #333;
+        color: white;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Invoice Management System</h1>
+
+<button onclick="generateInvoice()">Generate Invoice</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Invoice No</th>
+            <th>Service</th>
+            <th>Qty</th>
+            <th>Cost</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="invoiceTable"></tbody>
+</table>
+
+<h2 id="totalAmount"></h2>
+
+<script>
+function generateInvoice() {
+
+    let services = [
+        {name: "Website Development", qty: 2, cost: 5000},
+        {name: "App Design", qty: 1, cost: 3000},
+        {name: "SEO Service", qty: 3, cost: 1500}
+    ];
+
+    let table = document.getElementById("invoiceTable");
+    table.innerHTML = "";
+
+    let total = 0;
+
+    services.forEach((service, index) => {
+        let amount = service.qty * service.cost;
+        total += amount;
+
+        let row = `
+        <tr>
+            <td>INV00${index+1}</td>
+            <td>${service.name}</td>
+            <td>${service.qty}</td>
+            <td>₹${service.cost}</td>
+            <td>₹${amount}</td>
+        </tr>
+        `;
+
+        table.innerHTML += row;
+    });
+
+    document.getElementById("totalAmount").innerText =
+        "Total Amount: ₹" + total;
+}
+</script>
+
+</body>
+</html>
